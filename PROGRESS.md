@@ -27,3 +27,13 @@
 - **Next Steps**:
   - Consider adding a `restore` command to revert to previous timestamped `.bak` files.
   - Optional packaging with `pyproject.toml` for `pip install` / `pipx` support.
+
+### 2026-10-14 03:32 - Documentation Themes & Visual Previews Showcase
+- **What Changed**:
+  - Updated `README.md` with customizable theme palette previews (Tokyo Night, Catppuccin Mocha, Nord, Dracula, Gruvbox, Monochrome).
+  - Added visual layout slot schematic previews for all key presets (`pulse`, `studio`, `wide`).
+  - Added comprehensive details on `[tui].status_line_use_colors` and `/theme` switching inside Codex CLI.
+- **What Was Verified & How**:
+  - Validated markdown formatting and preview rendering in `README.md`.
+- **Next Steps**:
+  - Monitor user feedback on presets and theme rendering.
