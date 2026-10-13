@@ -256,10 +256,10 @@ def preview(values: tuple[str, ...], colors: bool) -> None:
     }
     name = next((preset.upper() for preset, items in PRESETS.items() if items == values), "CUSTOM")
     accent, reset = ("\033[96m", "\033[0m") if sys.stdout.isatty() and "NO_COLOR" not in os.environ else ("", "")
-    segments = "  ·  ".join(short.get(value, value.upper()) for value in values) or "(empty footer)"
-    print(f"\n  {accent}┌─ CODEX PULSE  /  {name}{reset}")
-    print(f"  {accent}│{reset}  {segments}")
-    print(f"  {accent}└─{reset}  Theme colors: {'on' if colors else 'off'}")
+    segments = "  |  ".join(short.get(value, value.upper()) for value in values) or "(empty footer)"
+    print(f"\n  {accent}+-- CODEX PULSE  /  {name}{reset}")
+    print(f"  {accent}|{reset}  {segments}")
+    print(f"  {accent}+--{reset}  Theme colors: {'on' if colors else 'off'}")
     print("     Layout preview only; Codex supplies the live values and footer styling.\n")
 
 

@@ -19,7 +19,7 @@ python .\codex_pulse.py preview
 python .\codex_pulse.py apply pulse
 ```
 
-Restart Codex to see the updated footer. Your current `config.toml` is backed up beside itself before an update. Codex Pulse changes only `[tui].status_line` and `[tui].status_line_use_colors`.
+Restart Codex to see the updated footer. The setting is stored in your user-level Codex config (`%USERPROFILE%\.codex\config.toml` on Windows, or `$CODEX_HOME/config.toml` when `CODEX_HOME` is set), so it persists across interactive CLI launches. Your current `config.toml` is backed up beside itself before an update. Codex Pulse changes only `[tui].status_line` and `[tui].status_line_use_colors`.
 
 To open Codex's own interactive picker at any time, enter `/statusline` in the TUI. Use `/theme` to change the palette that colors the footer.
 
