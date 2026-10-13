@@ -1,0 +1,6 @@
+# Local Codex data and editor files
+.codex/
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
