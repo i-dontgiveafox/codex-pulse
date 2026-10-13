@@ -1,27 +1,57 @@
 # Codex Pulse
 
-A small project for keeping Codex usage visible while you work.
+**A calm, customizable usage strip for the bottom of Codex CLI.**
 
-## First step: use Codex's built-in usage meters
+Codex Pulse helps you shape Codex's native footer around the things you care about: model, context, five-hour and weekly remaining usage, git state, task progress, and run permissions. It uses Codex's own status-line items and active theme colors, so the information stays inside the real Codex TUI.
 
-Recent Codex builds can show the five-hour and weekly usage windows in the terminal status line. Add this to your Codex `config.toml` (usually `%USERPROFILE%\.codex\config.toml` on Windows):
-
-```toml
-[tui]
-status_line = ["model-with-reasoning", "current-dir", "five-hour-limit", "weekly-limit"]
+```text
+gpt-6.1-sol · project · Context 42% used · 5h 28% left · weekly 71% left · ⚡ Fast
 ```
 
-Then restart Codex. You can also use `/statusline` in the Codex TUI to configure the built-in status line interactively.
+The exact labels and values are rendered by Codex and depend on your version and current session.
 
-This project does not modify your Codex configuration automatically. The native status line is the dependable starting point; custom status-line commands are not currently a supported config option in Codex's documented configuration.
+## Install
 
-## Project direction
+Requires Python 3.11+ and Codex CLI. No third-party packages or API keys.
 
-The initial goal is a clear, low-maintenance usage display inspired by [claude-pulse](https://github.com/NoobyGains/claude-pulse), tailored to Codex. Next steps:
+```powershell
+python .\codex_pulse.py preview
+python .\codex_pulse.py apply pulse
+```
 
-- Confirm which Codex versions expose the native usage meters.
-- Explore whether Codex stores additional usage details locally in a stable format.
-- Add an optional custom monitor only if it can use a supported, privacy-conscious data source.
+Restart Codex to see the updated footer. Your current `config.toml` is backed up beside itself before an update. Codex Pulse changes only `[tui].status_line` and `[tui].status_line_use_colors`.
+
+To open Codex's own interactive picker at any time, enter `/statusline` in the TUI. Use `/theme` to change the palette that colors the footer.
+
+## Presets
+
+| Preset | Footer contents |
+| --- | --- |
+| `pulse` | Model, context, five-hour limit, weekly limit, Fast mode |
+| `studio` | Model, project, git branch, context, both limits |
+| `sprint` | Model, task progress, run state, context, both limits |
+| `sentinel` | Model, permissions, approval mode, both limits |
+| `wide` | Model, project, branch, task progress, context, both limits, Fast mode |
+
+```powershell
+python .\codex_pulse.py presets
+python .\codex_pulse.py preview studio
+python .\codex_pulse.py apply studio
+python .\codex_pulse.py customize
+python .\codex_pulse.py show
+```
+
+`customize` lets you choose footer items and their order, then opt into the active Codex theme colors. The preview is a guide: Codex supplies the final wording, live values, and theme styling.
+
+## What it can show
+
+The current Codex TUI offers built-in items for model and reasoning, project or working directory, git branch and committed branch changes, task progress, run state, permissions and approval mode, context usage, five-hour and weekly remaining usage, Fast mode, token counts, and more. Some fields appear only when Codex has data for them.
+
+Codex Pulse keeps the layout compact and gives you presets for different workflows. It does not try to estimate usage from session logs or make extra network requests.
+
+## A note about customization
+
+Codex currently owns the footer renderer. It supports choosing and ordering built-in items and using the active theme's colors. Codex does not expose a supported external command hook for arbitrary labels, custom bar glyphs, or per-item colors. Pulse uses the supported footer API instead of patching or replacing the Codex executable. See the [Codex status-line picker source](https://github.com/openai/codex/blob/main/codex-rs/tui/src/bottom_pane/status_line_setup.rs) for the current item list and the [custom status-line request](https://github.com/openai/codex/issues/17827) for the external-renderer limitation.
 
 ## License
 
